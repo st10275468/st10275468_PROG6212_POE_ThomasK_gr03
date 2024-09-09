@@ -22,6 +22,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
         {
             return View();
         }
+        public IActionResult SubmitClaims()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
