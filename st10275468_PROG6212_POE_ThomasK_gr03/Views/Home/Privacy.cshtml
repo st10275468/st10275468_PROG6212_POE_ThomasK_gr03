@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claims Management (Admin)</title>
+    
     <style>
         body {
             background-color: teal;
@@ -158,24 +158,33 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Claim ID</th>
+                        <th>Claim Month</th>
+                        <th>Lecturer ID</th>
                         <th>Lecturer Name</th>
-                        <th>Total Amount</th>
+                        <th>Amount</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr data-status="pending">
-                        <td>John Doe</td>
-                        <td>$8000</td>
+                        <td>1</td>
+                        <td>July</td>
+                        <td>2</td>
+                        <td>Jeff Anderson</td>
+                        <td>R12000</td>
                         <td>Pending</td>
-                        <td><button class="details-button" onclick="showActions('John Doe')">View Actions</button></td>
+                        <td><button>View Actions</button></td>
                     </tr>
                     <tr data-status="approved">
-                        <td>Jane Smith</td>
-                        <td>$6750</td>
+                        <td>2</td>
+                        <td>July</td>
+                        <td>4</td>
+                        <td>John Tin</td>
+                        <td>R15000</td>
                         <td>Approved</td>
-                        <td><button class="details-button" onclick="showActions('Jane Smith')">View Actions</button></td>
+                        <td><button>View Actions</button></td>
                     </tr>
                 </tbody>
             </table>
