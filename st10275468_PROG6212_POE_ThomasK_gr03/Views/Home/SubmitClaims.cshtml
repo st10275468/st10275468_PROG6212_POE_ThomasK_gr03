@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claims Management</title>
+  
     <style>
         body {
             background-color: teal;
@@ -15,25 +15,30 @@
 
         .container {
             margin: 0 auto;
-            padding-top:20px;
+            
+           
             width: 100%;
         }
 
-        h1 {
+        .h1 {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 36px;
+           padding-top: 30px;
+          
+            font-size: 55px;
         }
 
         .row {
             display: flex;
             justify-content: space-between;
+
             gap: 100px; 
         }
 
         .column1{
+            
             width: 25%;
             padding: 10px;
+            
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -41,6 +46,7 @@
             width: 55%; 
             padding: 10px;
             background-color: white;
+            
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -121,11 +127,12 @@
     </style>
 </head>
 <body>
+    <h1>Submit and view Claims</h1>
     <div class="container">
       
         <div class="row">
             <div class="column1">
-                <h2>Submit Your Claim</h2>
+                <h2>Submit a Claim:</h2>
                 <form id="claimForm" method="post" action="/submit-claim">
                     <div class="form-group">
                         <label for="month">Claim Month:</label>
@@ -148,7 +155,7 @@
             </div>
 
             <div class="column">
-                <h2>Your Claims Overview</h2>
+                <h2>View your Claims:</h2>
                 <table>
                     <thead>
                         <tr>

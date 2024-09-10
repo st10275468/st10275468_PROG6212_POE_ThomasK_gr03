@@ -1,6 +1,199 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims Management (Admin)</title>
+    <style>
+        body {
+            background-color: teal;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-<p>Use this page to detail your site's privacy policy.</p>
+        .container {
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        h1 {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 55px;
+        }
+
+        .filter-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+            .filter-section label {
+                font-size: 18px;
+                margin-right: 10px;
+                color: white;
+            }
+
+            .filter-section select {
+                padding: 10px;
+                border: 1px solid teal;
+                border-radius: 4px;
+                background-color: white;
+                color: teal;
+                width: 200px;
+            }
+
+        .claims-table {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .claims-table h2 {
+                color: teal;
+                margin-bottom: 10px;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            color: black;
+            border: 1px solid teal;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: teal;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+       
+        table td {
+            padding: 6px;
+        }
+
+        
+        .action-buttons {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid teal;
+            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 300px;
+        }
+
+            .action-buttons h3 {
+                color: teal;
+                margin-bottom: 10px;
+            }
+
+            .action-buttons button {
+                background-color: teal;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                margin-right: 5px;
+            }
+
+                .action-buttons button:hover {
+                    background-color: darkcyan;
+                }
+
+       
+        .details-button {
+            background-color: teal;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+            .details-button:hover {
+                background-color: darkcyan;
+            }
+
+    </style>
+</head>
+<body>
+    <h1>Review and Approve Claims</h1>
+
+    <div class="container">
+       
+        <div class="filter-section">
+            <label for="filter-status">Filter by Status: </label>
+            <select id="filter-status">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+
+       
+        <div class="claims-table">
+            <h2>Submitted Claims</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lecturer Name</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-status="pending">
+                        <td>John Doe</td>
+                        <td>$8000</td>
+                        <td>Pending</td>
+                        <td><button class="details-button" onclick="showActions('John Doe')">View Actions</button></td>
+                    </tr>
+                    <tr data-status="approved">
+                        <td>Jane Smith</td>
+                        <td>$6750</td>
+                        <td>Approved</td>
+                        <td><button class="details-button" onclick="showActions('Jane Smith')">View Actions</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        
+        <div class="action-buttons" id="action-buttons">
+            <h3>Actions for <span id="lecturer-name"></span></h3>
+            <button>Approve</button>
+            <button>Reject</button>
+            <button onclick="viewDocuments()">View Documents</button>
+        </div>
+    </div>
+
+    <script>
+       
+
+      
+    </script>
+</body>
+</html>

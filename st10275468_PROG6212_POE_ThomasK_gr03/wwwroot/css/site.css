@@ -46,10 +46,8 @@ form {
     max-width: 340px;
     padding: 10px; 
     border: 1px solid White;
-    border-radius: 1px; 
+    border-radius: 8px; 
     background-color: white;
-    
-    
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
