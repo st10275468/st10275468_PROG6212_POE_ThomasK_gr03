@@ -7,15 +7,74 @@
 }
 
     .div1 {
-        text-align: left;
-        padding-top:100px;
+        
+        padding-top:20px;
+        
+        
+    }
+    .h1{
+        text-align:center;
+        padding-top:15px;
+        font-size:55px;
+    }
+    .h2{
+        color: white;
+        text-align:left;
+    }
+    .form-group{
+        padding-top:15px;
     }
 </style>
-<div class="text-center">
-    
-    
-</div>
-<div>
-    <h1 class="display-4">Login or create an account</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="path/to/your/styles.css">
+</head>
+<body>
+    <h1 class="h1">Contract Monthly Claim System</h1>
+    <div class="div1">
+        <form id="createAccountLecturerForm" method="post" action="/register">
+            <h2>Create an Account:</h2>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="lecturer">Lecturer</option>
+                    <option value="program_coordinator">Program Coordinator</option>
+                    <option value="academic_manager">Academic Manager</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your first name" required />
+            </div>
 
-</div>
+            <div class="form-group">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" placeholder="Enter your surname" required />
+            </div>
+           
+          
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
+
+          
+
+            <div class="form-group">
+                <button type="submit">Create Account</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
