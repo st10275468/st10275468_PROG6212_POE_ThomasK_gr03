@@ -35,45 +35,67 @@
 </head>
 <body>
     <h1 class="h1">Contract Monthly Claim System</h1>
-    <div class="div1">
-        <form id="createAccountLecturerForm" method="post" action="/register">
-            <h2>Create an Account:</h2>
-            <div class="form-group">
-                <label for="role">Role:</label>
-                <select id="role" name="role" required>
-                    <option value="lecturer">Lecturer</option>
-                    <option value="program_coordinator">Program Coordinator</option>
-                    <option value="academic_manager">Academic Manager</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter your first name" required />
-            </div>
+    <div class=" row text-center" style=" margin-left: 100px; padding-right:10px; margin-top: 30px;">
+   
+    <div class="col-md-6">
 
-            <div class="form-group">
-                <label for="surname">Surname:</label>
-                <input type="text" id="surname" name="surname" placeholder="Enter your surname" required />
-            </div>
-           
-          
+            <form id="loginForm" method="post" action="/login">
+                <h2>Login:</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" name="email" placeholder="Enter your email address" required />
+                </div>
 
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email address" required />
-            </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required />
+                </div>
 
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required />
-            </div>
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+        </div>
 
-          
+        <div class="col-md-6">
+            <form id="createAccountLecturerForm" method="post" action="/register">
+                <h2>Create an Account:</h2>
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="lecturer">Lecturer</option>
+                        <option value="program_coordinator">Program Coordinator</option>
+                        <option value="academic_manager">Academic Manager</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your first name" required />
+                </div>
 
-            <div class="form-group">
-                <button type="submit">Create Account</button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="surname">Surname:</label>
+                    <input type="text" id="surname" name="surname" placeholder="Enter your surname" required />
+                </div>
+
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                </div>
+
+
+
+                <div class="form-group">
+                    <button type="submit">Create Account</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
