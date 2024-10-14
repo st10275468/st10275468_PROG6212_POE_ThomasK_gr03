@@ -27,10 +27,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Data
                 .WithMany(c => c.Documents)
                 .HasForeignKey(d => d.claimID);
 
-            modelBuilder.Entity<Document>()
-                .HasOne(d => d.User)
-                .WithMany() 
-                .HasForeignKey(d => d.userID);
+           
+
+            modelBuilder.Entity<Claim>()
+                .Property(c => c.claimAmount)
+                .HasColumnType("decimal(18, 2)");
         }
     }
 }

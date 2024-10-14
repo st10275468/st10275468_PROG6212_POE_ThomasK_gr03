@@ -9,8 +9,7 @@
         public int claimID { get; set; }
         public Claim Claim { get; set; }
 
-        public int userID {  get; set; }
-        public User User { get; set; }
+       
 
 
 
