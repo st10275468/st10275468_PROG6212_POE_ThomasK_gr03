@@ -134,10 +134,10 @@
         <div class="row">
             <div class="column1">
                 <h2>Submit a Claim:</h2>
-                <form id="claimForm" method="post" action="/submit-claim">
+                <form id="claimForm" method="post" action="@Url.Action("SubmitClaim", "Claim")" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="month">Claim Month:</label>
-                        <input type="month" id="month" name="month" required />
+                        <input type="month" id="month" name="claimMonth" required />
                     </div>
                     <div class="form-group">
                         <label for="hoursWorked">Total Hours Worked:</label>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="form-group">
                         <label for="supportingDocuments">Supporting Documents (optional):</label>
-                        <input type="file" id="supportingDocuments" name="supportingDocuments" multiple />
+                        <input type="file" id="supportingDocuments" name="supportingDocument" multiple />
                     </div>
                     <button type="submit">Submit Claim</button>
                 </form>

@@ -19,16 +19,29 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                       
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SubmitClaims">Submit a Claim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Manage Claims</a>
-                        </li>
-                        
+                    
+                        @if (Context.Session.GetString("Role") == "Lecturer")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SubmitClaims">Submit a Claim</a>
+                            </li>
+                        }
+                        @if (Context.Session.GetString("Role") == "Program Coordinator" || Context.Session.GetString("Role") == "Academic Manager")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Manage Claims</a>
+                            </li>
+                        }
+                        @if(Context.Session.GetString("Role") != null)
+                        {
+                            <li class="nav-item">
+                                <a href="@Url.Action("Logout", "User")" class="nav-link">Logout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
