@@ -45,6 +45,7 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
            
             var Claims = _context.Claims
+                .Include(c => c.Documents)
                 .Where(c => c.userID == (int)fuserID)
                 .ToList();
 
@@ -74,6 +75,18 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             }
 
             return RedirectToAction("Privacy");
+        }
+        public IActionResult DownloadDocument(int documentID)
+        {
+            var document = _context.Documents.FirstOrDefault(document => document.documentID == documentID);
+            if (document == null)
+            {
+                return NotFound();
+            }
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Documents", document.path); 
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/octet-stream", document.path);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -166,12 +166,29 @@
                         foreach (var claim in Model)
                         {
                             <tr id="claim-row-@claim.claimID">
-                                <td>@claim.claimID</td>
+                                <td>No. @claim.claimID</td>
                                 <td>@claim.User.name @claim.User.surname</td>
                                 <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
                                 <td>R @claim.claimAmount</td>
                                 <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
-                                <td>@claim.claimStatus</td>
+                                <td>
+                                    @if (claim.Documents != null && claim.Documents.Any())
+                                    {
+                                        foreach (var document in claim.Documents)
+                                        {
+                                            <div>
+                                                <form asp-action="DownloadDocument" method="get">
+                                                    <input type="hidden" name="documentId" value="@document.documentID" />
+                                                    <button type="submit" class="action-buttons">Download Document</button>
+                                                </form>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span>No Documents</span>
+                                    }
+                                </td>
                                 <td> 
                                     <form asp-action="ApproveClaim" method="post">
                                         <input type="hidden" name="claimID" value="@claim.claimID" />

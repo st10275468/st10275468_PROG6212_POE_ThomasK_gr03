@@ -158,12 +158,16 @@
 
             <div class="column">
                 <h2>View your Claims:</h2>
+
                 <table>
                     <thead>
                         <tr>
                             <th>Claim ID</th>
-                            
+                            <th>Amount</th>
                             <th>Status</th>
+                            <th>Documents</th>
+                            <th>Claim Month</th>
+                            <th>Submission Date</th>
                             
 
                         </tr>
@@ -174,10 +178,29 @@
                             @foreach (var claim in Model)
                             {
                                 <tr>
-                                    <td>@claim.claimID</td>
-                                   
+                                    <td>No. @claim.claimID</td>
+                                    <td>R @claim.claimAmount</td>
                                     <td>@claim.claimStatus</td>
-                                   
+                                    <td>
+                                        @if (claim.Documents != null && claim.Documents.Any())
+                                        {
+                                            foreach (var document in claim.Documents)
+                                            {
+                                                <div>
+                                                    <form asp-action="DownloadDocument" method="get">
+                                                        <input type="hidden" name="documentId" value="@document.documentID" />
+                                                        <button type="submit" class="action-buttons">Download Document</button>
+                                                    </form>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span>No Documents</span>
+                                        }
+                                    </td>
+                                    <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
+                                    <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
                                 </tr>
                             }
                         }
