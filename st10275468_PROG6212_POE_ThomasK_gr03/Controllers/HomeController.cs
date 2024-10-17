@@ -25,7 +25,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
         public IActionResult Privacy()
         {
-            var allClaims = _context.Claims.ToList();
+            var allClaims = _context.Claims
+                .Include(claim => claim.User)
+                .Include(claim => claim.Documents)
+                .Where(claim => claim.claimStatus == "Pending")
+                .ToList();
 
             return View(allClaims);
             
@@ -47,6 +51,29 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View(Claims);
 
            
+        }
+        public IActionResult ApproveClaim(int claimID)
+        {
+            var claim = _context.Claims.FirstOrDefault(c => c.claimID == claimID);
+            if (claim != null)
+            {
+                claim.claimStatus = "Approved";
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Privacy"); 
+        }
+
+        public IActionResult DenyClaim(int claimID)
+        {
+            var claim = _context.Claims.FirstOrDefault(c => c.claimID == claimID);
+            if (claim != null)
+            {
+                claim.claimStatus = "Denied";
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Privacy");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
