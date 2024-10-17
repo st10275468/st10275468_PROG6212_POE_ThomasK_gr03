@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model List<st10275468_PROG6212_POE_ThomasK_gr03.Models.Claim>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -157,33 +158,34 @@
                 <thead>
                     <tr>
                         <th>Claim ID</th>
+                        <th>User ID</th>
                         <th>Claim Month</th>
-                        <th>Lecturer ID</th>
-                        <th>Lecturer Name</th>
-                        <th>Amount</th>
+                        <th>Claim Amount</th>
+                        <th>Submission Date</th>
                         <th>Status</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-status="pending">
-                        <td>1</td>
-                        <td>July</td>
-                        <td>2</td>
-                        <td>Jeff Anderson</td>
-                        <td>R12000</td>
-                        <td>Pending</td>
-                        <td><button>View Actions</button></td>
-                    </tr>
-                    <tr data-status="approved">
-                        <td>2</td>
-                        <td>July</td>
-                        <td>4</td>
-                        <td>John Tin</td>
-                        <td>R15000</td>
-                        <td>Approved</td>
-                        <td><button>View Actions</button></td>
-                    </tr>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var claim in Model)
+                        {
+                            <tr>
+                                <td>@claim.claimID</td>
+                                <td>@claim.userID</td>
+                                <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
+                                <td>@claim.claimAmount</td>
+                                <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
+                                <td>@claim.claimStatus</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">No claims available.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
