@@ -40,11 +40,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             if (existingUser != null)
             {
                
-                HttpContext.Session.SetString("userID", existingUser.userID.ToString());
+                HttpContext.Session.SetInt32("userID", existingUser.userID);
                 HttpContext.Session.SetString("Role", existingUser.role);
                 HttpContext.Session.SetString("Name" , existingUser.name);
                 
-                TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "! As a " + existingUser.role + " . ");
+                TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "! As a " + existingUser.role + " . " );
                 if (existingUser.role == "Lecturer")
                 {
                     return RedirectToAction("Index", "Home"); 

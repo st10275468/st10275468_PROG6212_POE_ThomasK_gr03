@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using st10275468_PROG6212_POE_ThomasK_gr03.Data;
 using st10275468_PROG6212_POE_ThomasK_gr03.Models;
 namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
@@ -6,23 +7,27 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
     public class ClaimController : Controller
     {
         private readonly ContractManagementContext _context;
-
+        
+       
         public ClaimController(ContractManagementContext context)
         {
             _context = context;
+           
         }
+
 
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(DateTime claimMonth, int hoursWorked, decimal hourlyRate, IFormFileCollection supportingDocument)
         {
             if (ModelState.IsValid)
             {
-                var fuserID = HttpContext.Session.GetString("userID");
-                if (string.IsNullOrEmpty(fuserID) || !int.TryParse(fuserID, out int userID))
+                var fuserID = HttpContext.Session.GetInt32("userID");
+                System.Diagnostics.Debug.WriteLine($"User ID in session: {fuserID}");
+                if (fuserID == null )
                 {
                     
                     ModelState.AddModelError("", "User is not logged in or user ID is invalid.");
-                    return View("Index"); 
+                    return RedirectToAction("Index", "Home"); 
                 }
                 var claim = new Claim
                 {
@@ -30,12 +35,14 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                     claimAmount = hourlyRate * hoursWorked,
                     submissionDate = DateTime.Now,
                     claimStatus = "Pending",
-                    userID = userID,
+                    userID = (int)fuserID,
 
                      };
 
                 _context.Claims.Add(claim);
                 await _context.SaveChangesAsync();
+                System.Diagnostics.Debug.WriteLine("Claim submitted successfully.");
+
 
                 if (supportingDocument != null)
                 {
@@ -67,16 +74,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 return RedirectToAction("SubmitClaims", "Home");
 
             }
-            return RedirectToAction("SubmitClaims", "Home");
+            return RedirectToAction("SubmitClaims","Home");
 
         }
 
-        [HttpGet]
-        public IActionResult SubmitClaims()
-        {
-            return View();
-        }
-
+        
         public IActionResult Index()
         {
             return View();

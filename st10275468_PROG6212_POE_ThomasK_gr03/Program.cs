@@ -17,7 +17,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true; // Make the cookie inaccessible via client-side scripts
     options.Cookie.IsEssential = true; // Ensure session cookie is always sent to the client
 });
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
