@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024]. */
+using Microsoft.EntityFrameworkCore;
 using st10275468_PROG6212_POE_ThomasK_gr03.Models;
 
 namespace st10275468_PROG6212_POE_ThomasK_gr03.Data
@@ -16,6 +17,7 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Creating the following tables in the database
            
             modelBuilder.Entity<Claim>()
                 .HasOne(c => c.User)

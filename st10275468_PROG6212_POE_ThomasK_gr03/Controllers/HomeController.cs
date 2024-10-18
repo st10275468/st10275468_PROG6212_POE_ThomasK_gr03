@@ -1,3 +1,4 @@
+/*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024]. */
 using Microsoft.AspNetCore.Mvc;
 using st10275468_PROG6212_POE_ThomasK_gr03.Models;
 using st10275468_PROG6212_POE_ThomasK_gr03.Controllers;
@@ -22,14 +23,21 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Method that passes all the claims and allows them to be displayed to the Admins who can manage them
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Privacy()
         {
+            //Retrieving the current user id
             int? userID = HttpContext.Session.GetInt32("userID");
             if (userID == null)
             {
+                //Error handeling to make sure that only logged in users will be allowed on this page
                 TempData["ErrorMessage"] = "You must be logged in to access this page.";
                 return RedirectToAction("Index", "Home");
              }
+            //Creating a list of all the claims and passing it to the view to be displayed
             var Claims = await _context.Claims
                 .Include(claim => claim.User)
                 .Include(claim => claim.Documents)
@@ -39,30 +47,42 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View(Claims);
             
         }
+        /// <summary>
+        /// Method created that will display the users claims specific to the user logged in
+        /// </summary>
+        /// <returns></returns>
         public IActionResult SubmitClaims()
         {
+            //Retrieving the current user id
             var userID = HttpContext.Session.GetInt32("userID");
             if (userID == null)
             {
+                //Error handeling if the user is not logged in
                 TempData["ErrorMessage"] = "You must be logged in to access this page.";
                 return RedirectToAction("Index", "Home");
             }
-
+            //Making a list with all the users claims associated with that specific user ID
             var Claims = _context.Claims
                 .Include(claim => claim.Documents)
                 .Where(claim => claim.userID == (int)userID)
                 .ToList();
-
+            //passing the list to the view to be displayed
             return View(Claims);
 
            
         }
+
+        /// <summary>
+        /// Method created to allow the Admins to approve claims when the button is clicked
+        /// </summary>
+        /// <param name="claimID"></param>
+        /// <returns></returns>
         public IActionResult ApproveClaim(int claimID)
         {
             var Claim = _context.Claims.FirstOrDefault(claim => claim.claimID == claimID);
             if (Claim != null)
             {
-                
+                //Changing the claim status to approved once the button is clicked
                 Claim.claimStatus = "Approved";
                 _context.SaveChanges();
             }
@@ -70,11 +90,17 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return RedirectToAction("Privacy"); 
         }
 
+        /// <summary>
+        /// Method created to allow the admins to deny claims 
+        /// </summary>
+        /// <param name="claimID"></param>
+        /// <returns></returns>
         public IActionResult DenyClaim(int claimID)
         {
             var Claim = _context.Claims.FirstOrDefault(claim => claim.claimID == claimID);
             if (Claim != null)
             {
+                //Changing the claim status to denied once the deny button is clicked
                 Claim.claimStatus = "Denied";
                 _context.SaveChanges();
             }
@@ -82,6 +108,12 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return RedirectToAction("Privacy");
         }
 
+
+        /// <summary>
+        /// Method created to allow the admins to download and view the documents associated with the specific claims
+        /// </summary>
+        /// <param name="documentID"></param>
+        /// <returns></returns>
         public IActionResult DownloadDocument(int documentID)
         {
             var document = _context.Documents.FirstOrDefault(document => document.documentID == documentID);

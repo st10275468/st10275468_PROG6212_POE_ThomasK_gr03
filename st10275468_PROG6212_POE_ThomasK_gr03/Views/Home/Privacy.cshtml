@@ -1,4 +1,5 @@
-﻿@model List<st10275468_PROG6212_POE_ThomasK_gr03.Models.Claim>
+﻿<!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024].-->
+@model List<st10275468_PROG6212_POE_ThomasK_gr03.Models.Claim>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,17 +68,17 @@
             .details-button:hover {
                 background-color: grey;
             }
-        /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */
+      
     </style>
 </head>
 <body>
     <h1>Review all Pending Claims</h1>
 
     <div class="container">
-       
-        
+
+        <!--Table to show the admins all the pending claims-->
             <div class="claims-table">
-            <h2>Submitted Claims</h2>
+            <h2>All pending Claims</h2>
             <div class="table-container" style="max-height: 400px; overflow-y: auto;">
                 <table>
                 <thead>
@@ -94,6 +95,7 @@
                 <tbody>
                     @if (Model != null && Model.Any())
                     {
+                            <!--Looping through all the claims and displaying the ones with a pending status-->
                         foreach (var claim in Model)
                         {
                             <tr id="claim-row-@claim.claimID">
@@ -105,6 +107,7 @@
                                 <td>
                                     @if (claim.Documents != null && claim.Documents.Any())
                                     {
+                                            <!--Displaying a download button if there is documents attacthed to specific claimns-->
                                         foreach (var document in claim.Documents)
                                         {
                                             <div>

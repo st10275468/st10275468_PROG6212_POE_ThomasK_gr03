@@ -1,4 +1,5 @@
-﻿@{
+﻿<!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024].-->
+@{
     ViewData["Title"] = "Home Page";
 }
 <style>
@@ -31,7 +32,7 @@
         font-size: 16px;
         margin-right: 5px;
     }
-    /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */
+    
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +57,10 @@
             @TempData["ErrorMessage"]
         </div>
     }
+    <!--If the user has not logged in it will show them these forms-->
     @if (Context.Session.GetString("Role") == null)
     {
+
         <div class=" row text-center" style=" margin-left: 100px; padding-right:10px; margin-top: 30px;">
 
     <div class="col-md-6">
@@ -117,6 +120,7 @@
     </form>
 </div> 
     </div> }
+    <!--If the user's role is a program coordinator or a academic manager they will be shown this form-->
     @if (Context.Session.GetString("Role") == "Program Coordinator" || Context.Session.GetString("Role") == "Academic Manager")
     {
         <div class=" row text-center" style=" margin-left: 100px; padding-right:10px; margin-top: 30px;">
@@ -135,6 +139,7 @@
             </div>
         </div>
     }
+    <!--If the user's role is a lecturer they will be shown this form-->
     @if (Context.Session.GetString("Role") == "Lecturer")
     {
         <div class=" row text-center" style=" margin-left: 100px; padding-right:10px; margin-top: 30px;">
@@ -166,4 +171,4 @@
     </script>
 </body>
 </html>
-<!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024].-->
+

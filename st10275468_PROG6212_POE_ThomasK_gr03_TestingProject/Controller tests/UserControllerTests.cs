@@ -1,10 +1,14 @@
-﻿using System;
+﻿/*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024].
+ *  Microsoft. (n.d.). Session Management in ASP.NET Core. Available at: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0#session [Accessed: 17 October 2024].
+ Microsoft. (n.d.). Testing ASP.NET Core Services in Multi-Container Microservice .NET Applications. Available at: https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/test-aspnet-core-services-web-apps [Accessed: 17 October 2024].*/
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +31,9 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
         private ContractManagementContext _context;
         private UserController _controller;
 
+        /// <summary>
+        /// Setting up the testing environment so that the tests work
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -53,6 +60,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
         }
 
 
+        /// <summary>
+        /// Test method created to test the user Registration method
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task Register_ValidUser_RedirectsToIndex()
         {
@@ -79,6 +90,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
         }
 
 
+        /// <summary>
+        /// Test method created to test the user login method
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task Login_ValidUser_RedirectsToIndex()
         {

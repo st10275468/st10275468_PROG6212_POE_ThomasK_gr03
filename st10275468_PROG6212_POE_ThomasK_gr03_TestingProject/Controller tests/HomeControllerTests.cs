@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024].
+ *  Microsoft. (n.d.). Session Management in ASP.NET Core. Available at: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-7.0#session [Accessed: 17 October 2024].
+ Microsoft. (n.d.). Testing ASP.NET Core Services in Multi-Container Microservice .NET Applications. Available at: https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/test-aspnet-core-services-web-apps [Accessed: 17 October 2024].*/
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -20,6 +23,9 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
         private ContractManagementContext _context;
         private HomeController _controller;
 
+        /// <summary>
+        /// Setting up the testing environment so that the tests will work
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
@@ -55,6 +61,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
             _context.Database.EnsureDeleted();
         }
 
+        /// <summary>
+        /// Test method created to test the approve claim method
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task ApproveClaim_Valid_UpdatesClaimStatus()
         {
@@ -78,8 +88,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
             Assert.AreEqual("Approved", updatedClaim.claimStatus);
         }
 
-        
 
+        /// <summary>
+        /// Test method created to test the Deny claim method
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task DenyClaim_Valid_UpdatesClaimStatus()
         {
@@ -101,6 +114,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
             Assert.AreEqual("Denied", updatedClaim.claimStatus);
         }
 
+        /// <summary>
+        /// Test method created to test the Download document method
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task DownloadDocument_Valid_ReturnsFileDownload()
         {
@@ -128,6 +145,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
             File.Delete(filePath);
         }
 
+        /// <summary>
+        /// Test method created to test the Submit claims method
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task SubmitClaims_UserNotLoggedIn_RedirectsToIndex()
         {
@@ -146,6 +167,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.Controller_tests
         }
 
 
+        /// <summary>
+        /// Test method created to test if the user is logged in
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async Task Privacy_UserNotLoggedIn_RedirectsToIndex()
         {
