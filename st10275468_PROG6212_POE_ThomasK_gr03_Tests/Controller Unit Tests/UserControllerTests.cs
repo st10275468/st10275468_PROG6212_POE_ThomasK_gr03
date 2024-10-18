@@ -10,8 +10,18 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03_Tests.Controller_Unit_Tests
 {
     public class UserControllerTests
     {
+        private readonly UserController _controller;
+        private readonly ContractManagementContext _context;
 
+        public UserControllerTests()
+        {
+            var options = new DbContextOptionsBuilder<ContractManagementContext>()
+                .UseInMemoryDatabase(databaseName: "TestingDatabase")
+                .Options;
 
+            _context = new ContractManagementContext(options);
+            _controller = new UserController(_context);
+        }
 
     }
 }

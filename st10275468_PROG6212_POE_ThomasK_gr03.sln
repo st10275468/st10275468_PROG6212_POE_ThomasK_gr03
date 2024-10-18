@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "st10275468_PROG6212_POE_ThomasK_gr03", "st10275468_PROG6212_POE_ThomasK_gr03\st10275468_PROG6212_POE_ThomasK_gr03.csproj", "{E351CC9C-E575-439E-8218-667CA56CF454}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "st10275468_PROG6212_POE_ThomasK_gr03_Tests", "st10275468_PROG6212_POE_ThomasK_gr03_Tests\st10275468_PROG6212_POE_ThomasK_gr03_Tests.csproj", "{4437E9F7-42B7-4BCD-91BD-05E3602E7315}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "st10275468_PROG6212_POE_ThomasK_gr03_TestingProject", "st10275468_PROG6212_POE_ThomasK_gr03_TestingProject\st10275468_PROG6212_POE_ThomasK_gr03_TestingProject.csproj", "{6703C7B7-29F7-40C9-A6FA-F7FCC26E9991}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{E351CC9C-E575-439E-8218-667CA56CF454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E351CC9C-E575-439E-8218-667CA56CF454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E351CC9C-E575-439E-8218-667CA56CF454}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4437E9F7-42B7-4BCD-91BD-05E3602E7315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4437E9F7-42B7-4BCD-91BD-05E3602E7315}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4437E9F7-42B7-4BCD-91BD-05E3602E7315}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4437E9F7-42B7-4BCD-91BD-05E3602E7315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6703C7B7-29F7-40C9-A6FA-F7FCC26E9991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6703C7B7-29F7-40C9-A6FA-F7FCC26E9991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6703C7B7-29F7-40C9-A6FA-F7FCC26E9991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6703C7B7-29F7-40C9-A6FA-F7FCC26E9991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
