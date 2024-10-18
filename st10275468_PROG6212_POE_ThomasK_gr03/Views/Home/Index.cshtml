@@ -12,17 +12,24 @@
         
         
     }
-    .h1{
-        text-align:center;
-        padding-top:15px;
-        font-size:55px;
-    }
+    
     .h2{
         color: white;
         text-align:left;
     }
     .form-group{
         padding-top:15px;
+    }
+
+    .action-buttons {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 5px;
     }
     /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */
 </style>
@@ -68,7 +75,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit">Login</button>
+                        <button type="submit" class="action-buttons">Login</button>
                     </div>
                 </form>
                 </div>
@@ -105,11 +112,51 @@
             <input type="password" id="password" name="Password" placeholder="Enter your password" required />
         </div>
         <div class="form-group">
-            <button type="submit">Create Account</button>
+                        <button type="submit" class="action-buttons">Create Account</button>
         </div>
     </form>
 </div> 
     </div> }
+    @if (Context.Session.GetString("Role") == "Program Coordinator" || Context.Session.GetString("Role") == "Academic Manager")
+    {
+        <div class=" row text-center" style=" margin-left: 100px; padding-right:10px; margin-top: 30px;">
+
+            <div class="col-md-6">
+                <p>Helwwwwwwwwwwwwwwwwwwwwwwww</p>
+              
+            </div>
+
+            <div class="col-md-6">
+               
+            </div>
+        </div>
+    }
+    @if (Context.Session.GetString("Role") == "Lecturer")
+    {
+        <div class=" row text-center" style=" margin-left: 100px; padding-right:10px; margin-top: 30px;">
+
+            <div class="col-md-6">
+                <p>You can access claims</p>
+
+            </div>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    }
+    <script>
+        setTimeout(function() {
+            var successAlert = document.querySelector('.alert-success');
+            var errorAlert = document.querySelector('.alert-danger');
+
+            if (successAlert) {
+                successAlert.style.display = 'none';
+            }
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 3000);
+    </script>
 </body>
 </html>
 <!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024].-->

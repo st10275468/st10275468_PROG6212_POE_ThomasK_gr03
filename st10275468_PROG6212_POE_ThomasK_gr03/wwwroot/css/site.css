@@ -15,7 +15,7 @@ body {
 }
 
     .navbar .nav-link {
-        color: teal !important;
+        color: black !important;
     }
 
     .navbar .navbar-brand,
@@ -58,7 +58,7 @@ h1 {
 }
 
 h2 {
-    color: teal;
+    color: black;
     text-align: left;
     margin-bottom: 10px;
 }
@@ -70,7 +70,7 @@ h2 {
 
 label {
     display: block;
-    color: teal;
+    color: black;
     margin-bottom: 8px;
     font-weight: bold;
     text-align: left;
@@ -85,7 +85,7 @@ select
     padding: 1px;
     
     box-sizing: border-box;
-    border: 1px solid teal;
+    border: 1px solid black;
     font-size: 15px;
     border-radius: 1px; 
 }
@@ -105,4 +105,129 @@ button {
     button:hover {
         background-color: darkcyan;
     }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    color: black;
+    border-bottom: 1px solid Teal;
+    border-right: 1px solid Teal;
+    border-left: 1px solid Teal;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+.claims-table {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .claims-table h2 {
+        color: black;
+        margin-bottom: 10px;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    color: black;
+    border: 1px solid teal;
+    white-space: nowrap;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+
+table td {
+    padding: 6px;
+}
+
+.column1 {
+    width: 25%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.column {
+    width: 60%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .column1 h2, .column h2 {
+        color: black;
+        margin-bottom: 10px;
+    }
+label {
+    display: block;
+    color: black;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 1px;
+    box-sizing: border-box;
+    border: 1px solid teal;
+    font-size: 15px;
+    border-radius: 1px;
+}
+.alert-success {
+    background-color: #155724; /* Darker green */
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #721c24; /* Darker red */
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
 /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */

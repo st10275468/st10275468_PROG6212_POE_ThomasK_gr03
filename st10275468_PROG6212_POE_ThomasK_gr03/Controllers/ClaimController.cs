@@ -22,11 +22,9 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             if (ModelState.IsValid)
             {
                 var fuserID = HttpContext.Session.GetInt32("userID");
-                System.Diagnostics.Debug.WriteLine($"User ID in session: {fuserID}");
                 if (fuserID == null )
                 {
-                    
-                    ModelState.AddModelError("", "User is not logged in or user ID is invalid.");
+                    TempData["ErrorMessage"] = "Invalid login or userID";
                     return RedirectToAction("Index", "Home"); 
                 }
                 var claim = new Claim
@@ -41,7 +39,7 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
                 _context.Claims.Add(claim);
                 await _context.SaveChangesAsync();
-                System.Diagnostics.Debug.WriteLine("Claim submitted successfully.");
+                TempData["SuccessMessage"] = "Your claim has been submitted successfully";
 
 
                 if (supportingDocument != null)

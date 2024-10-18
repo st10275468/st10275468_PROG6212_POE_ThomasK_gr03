@@ -19,81 +19,13 @@
             margin: 0 auto;
             width: 90%;
         }
-
-        h1 {
-            text-align: center;
-            padding-top: 30px;
-            font-size: 55px;
-        }
-
-        .filter-section {
-            margin: 20px 0;
+         .button-container {
             display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            gap: 5px;
         }
-
-            .filter-section label {
-                font-size: 18px;
-                margin-right: 10px;
-                color: white;
-            }
-
-            .filter-section select {
-                padding: 10px;
-                border: 1px solid teal;
-                border-radius: 4px;
-                background-color: white;
-                color: teal;
-                width: 200px;
-            }
-
-        .claims-table {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-            .claims-table h2 {
-                color: teal;
-                margin-bottom: 10px;
-            }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-            color: black;
-            border: 1px solid teal;
-            white-space: nowrap;
-        }
-
-        th {
-            background-color: teal;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-
-       
-        table td {
-            padding: 6px;
-        }
-
         
         .action-buttons {
-            background-color: teal;
+            background-color: red;
             color: white;
             border: none;
             padding: 8px 16px;
@@ -102,8 +34,7 @@
             font-size: 14px;
             margin-right: 5px;
         }
-
-            .action-buttons h3 {
+         .action-buttons h3 {
                 color: teal;
                 margin-bottom: 10px;
             }
@@ -120,22 +51,21 @@
             }
 
                 .action-buttons button:hover {
-                    background-color: darkcyan;
+                    background-color: grey;
                 }
 
-       
-        .details-button {
-            background-color: teal;
+       .details-button {
+            background-color: green;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 14px;
         }
 
             .details-button:hover {
-                background-color: darkcyan;
+                background-color: grey;
             }
         /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */
     </style>
@@ -146,9 +76,10 @@
     <div class="container">
        
         
-         <div class="claims-table">
+            <div class="claims-table">
             <h2>Submitted Claims</h2>
-            <table>
+            <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                <table>
                 <thead>
                     <tr>
                         <th>Claim ID</th>
@@ -179,7 +110,7 @@
                                             <div>
                                                 <form asp-action="DownloadDocument" method="get">
                                                     <input type="hidden" name="documentId" value="@document.documentID" />
-                                                    <button type="submit" class="action-buttons">Download Document</button>
+                                                    <button type="submit" class="details-button">Download Document</button>
                                                 </form>
                                             </div>
                                         }
@@ -189,15 +120,17 @@
                                         <span>No Documents</span>
                                     }
                                 </td>
-                                <td> 
-                                    <form asp-action="ApproveClaim" method="post">
-                                        <input type="hidden" name="claimID" value="@claim.claimID" />
-                                        <button type="submit" class="action-buttons approve">Approve</button>
-                                    </form>
-                                    <form asp-action="DenyClaim" method="post">
-                                        <input type="hidden" name="claimID" value="@claim.claimID" />
-                                        <button type="submit" class="action-buttons deny">Deny</button>
-                                    </form>
+                                <td>
+                                    <div class="button-container">
+                                        <form asp-action="ApproveClaim" method="post" style="display:inline;">
+                                            <input type="hidden" name="claimID" value="@claim.claimID" />
+                                            <button type="submit" class="details-button approve">Approve</button>
+                                        </form>
+                                        <form asp-action="DenyClaim" method="post" style="display:inline;">
+                                            <input type="hidden" name="claimID" value="@claim.claimID" />
+                                            <button type="submit" class="action-buttons deny">Deny</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -210,10 +143,23 @@
                     }
                 </tbody>
             </table>
+            </div>
         </div>
         
     </div>
-    
+    <script>
+        setTimeout(function() {
+            var successAlert = document.querySelector('.alert-success');
+            var errorAlert = document.querySelector('.alert-danger');
+
+            if (successAlert) {
+                successAlert.style.display = 'none';
+            }
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 3000);
+    </script>
 </body>
 </html>
 <!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024].-->

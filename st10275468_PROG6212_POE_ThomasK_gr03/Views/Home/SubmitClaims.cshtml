@@ -16,16 +16,7 @@
 
         .container {
             margin: 0 auto;
-            
-           
-            width: 100%;
-        }
-
-        .h1 {
-            text-align: center;
-           padding-top: 30px;
-          
-            font-size: 55px;
+             width: 100%;
         }
 
         .row {
@@ -35,101 +26,46 @@
             gap: 100px; 
         }
 
-        .column1{
-            
-            width: 25%;
-            padding: 10px;
-            
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        } .column {
-            width: 55%; 
-            padding: 10px;
-            background-color: white;
-            
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-            .column1 h2, .column h2 {
-                color: teal;
-                margin-bottom: 10px;
-            }
-
-        
         .form-group {
             margin-bottom: 5px;
         }
 
-        label {
-            display: block;
-            color: teal;
-            margin-bottom: 8px;
-            font-weight: bold;
-            text-align: left;
+        .action-buttons {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
         }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        select,
-        input[type="number"],
-        input[type="file"] {
-            width: 100%;
-            padding: 1px;
-            box-sizing: border-box;
-            border: 1px solid teal;
-            font-size: 15px;
-            border-radius: 1px;
-        }
-
         button {
             width: 100%;
             padding: 5px;
-            background-color: teal;
+            background-color: green;
+            border-radius: 4px;
             color: white;
             border: none;
-            border-radius: 1px;
+           
             font-size: 18px;
             cursor: pointer;
         }
 
             button:hover {
-                background-color: darkcyan;
+                background-color: grey;
             }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            color: black;
-            border-bottom: 1px solid Teal;
-            border-right: 1px solid Teal;
-            border-left: 1px solid Teal;
-        }
-
-        th {
-            background-color: teal;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
+      
         /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */
     </style>
 </head>
 <body>
+
     <h1>Submit and view Claims</h1>
+    
+
+   
     <div class="container">
       
         <div class="row">
@@ -153,68 +89,92 @@
                         <input type="file" id="supportingDocuments" name="supportingDocument" multiple />
                     </div>
                     <button type="submit">Submit Claim</button>
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["SuccessMessage"]
+                        </div>
+                    }
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["ErrorMessage"]
+                        </div>
+                    }
                 </form>
             </div>
 
             <div class="column">
                 <h2>View your Claims:</h2>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Claim ID</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Documents</th>
-                            <th>Claim Month</th>
-                            <th>Submission Date</th>
-                            
-
-                        </tr>
-                    </thead>
-                   <tbody>
-                        @if (Model != null && Model.Any())
-                        {
-                            @foreach (var claim in Model)
+                <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Documents</th>
+                                <th>Claim Month</th>
+                                <th>Submission Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var claim in Model)
+                                {
+                                    <tr>
+                                        <td>No. @claim.claimID</td>
+                                        <td>R @claim.claimAmount</td>
+                                        <td>@claim.claimStatus</td>
+                                        <td>
+                                            @if (claim.Documents != null && claim.Documents.Any())
+                                            {
+                                                foreach (var document in claim.Documents)
+                                                {
+                                                    <div>
+                                                        <form asp-action="DownloadDocument" method="get">
+                                                            <input type="hidden" name="documentId" value="@document.documentID" />
+                                                            <button type="submit" class="action-buttons">Download Document</button>
+                                                        </form>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>No Documents</span>
+                                            }
+                                        </td>
+                                        <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
+                                        <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
+                                    </tr>
+                                }
+                            }
+                            else
                             {
                                 <tr>
-                                    <td>No. @claim.claimID</td>
-                                    <td>R @claim.claimAmount</td>
-                                    <td>@claim.claimStatus</td>
-                                    <td>
-                                        @if (claim.Documents != null && claim.Documents.Any())
-                                        {
-                                            foreach (var document in claim.Documents)
-                                            {
-                                                <div>
-                                                    <form asp-action="DownloadDocument" method="get">
-                                                        <input type="hidden" name="documentId" value="@document.documentID" />
-                                                        <button type="submit" class="action-buttons">Download Document</button>
-                                                    </form>
-                                                </div>
-                                            }
-                                        }
-                                        else
-                                        {
-                                            <span>No Documents</span>
-                                        }
-                                    </td>
-                                    <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
-                                    <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
+                                    <td colspan="5">No claims available.</td>
                                 </tr>
                             }
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="5">No claims available.</td>
-                            </tr>
-                        }
-                   </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        setTimeout(function() {
+            var successAlert = document.querySelector('.alert-success');
+            var errorAlert = document.querySelector('.alert-danger');
+
+            if (successAlert) {
+                successAlert.style.display = 'none';
+            }
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 3000);
+    </script>
 </body>
 </html>
 <!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024].-->

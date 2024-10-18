@@ -21,7 +21,9 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             {
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Account created successfully. You can now log in.";
+
+                TempData["SuccessMessage"] = "Account created successfully.";
+                
                 return RedirectToAction("Index", "Home");
             }
             
@@ -44,19 +46,21 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 HttpContext.Session.SetString("Role", existingUser.role);
                 HttpContext.Session.SetString("Name" , existingUser.name);
                 
-                TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "! As a " + existingUser.role + " . " );
+                TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "! As a " + existingUser.role + " you can submit your claims and view your past claims. " );
                 if (existingUser.role == "Lecturer")
                 {
+                    TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "!");
                     return RedirectToAction("Index", "Home"); 
                 }
                 if (existingUser.role == "Program Coordinator" || existingUser.role == "Academic Manager")
                 {
+                    TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "!");
+
                     return RedirectToAction("Index", "Home");
                 }
                 
             }
-
-            ModelState.AddModelError("", "Invalid login attempt.");
+            TempData["ErrorMessage"] = ("Failed Login attempt! Please create an account or try again");
             return RedirectToAction("Index", "Home");
         }
 

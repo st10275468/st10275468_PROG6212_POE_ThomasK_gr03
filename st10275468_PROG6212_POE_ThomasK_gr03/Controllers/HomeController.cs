@@ -4,6 +4,7 @@ using st10275468_PROG6212_POE_ThomasK_gr03.Controllers;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using st10275468_PROG6212_POE_ThomasK_gr03.Data;
+using System.Drawing;
 
 namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 {
@@ -25,28 +26,34 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
         public IActionResult Privacy()
         {
-            var allClaims = _context.Claims
+            var userID = HttpContext.Session.GetInt32("userID");
+            if (userID == null)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to access this page.";
+                return RedirectToAction("Index", "Home");
+             }
+            var Claims = _context.Claims
                 .Include(claim => claim.User)
                 .Include(claim => claim.Documents)
                 .Where(claim => claim.claimStatus == "Pending")
                 .ToList();
 
-            return View(allClaims);
+            return View(Claims);
             
         }
         public IActionResult SubmitClaims()
         {
-            var fuserID = HttpContext.Session.GetInt32("userID");
-            if (fuserID == null)
+            var userID = HttpContext.Session.GetInt32("userID");
+            if (userID == null)
             {
-                TempData["ErrorMessage"] = "User is not logged in.";
+                TempData["ErrorMessage"] = "You must be logged in to access this page.";
                 return RedirectToAction("Index", "Home");
             }
 
            
             var Claims = _context.Claims
-                .Include(c => c.Documents)
-                .Where(c => c.userID == (int)fuserID)
+                .Include(claim => claim.Documents)
+                .Where(claim => claim.userID == (int)userID)
                 .ToList();
 
             return View(Claims);
@@ -55,10 +62,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
         }
         public IActionResult ApproveClaim(int claimID)
         {
-            var claim = _context.Claims.FirstOrDefault(c => c.claimID == claimID);
-            if (claim != null)
+            var Claim = _context.Claims.FirstOrDefault(claim => claim.claimID == claimID);
+            if (Claim != null)
             {
-                claim.claimStatus = "Approved";
+                
+                Claim.claimStatus = "Approved";
                 _context.SaveChanges();
             }
 
@@ -67,15 +75,16 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
         public IActionResult DenyClaim(int claimID)
         {
-            var claim = _context.Claims.FirstOrDefault(c => c.claimID == claimID);
-            if (claim != null)
+            var Claim = _context.Claims.FirstOrDefault(claim => claim.claimID == claimID);
+            if (Claim != null)
             {
-                claim.claimStatus = "Denied";
+                Claim.claimStatus = "Denied";
                 _context.SaveChanges();
             }
 
             return RedirectToAction("Privacy");
         }
+
         public IActionResult DownloadDocument(int documentID)
         {
             var document = _context.Documents.FirstOrDefault(document => document.documentID == documentID);
