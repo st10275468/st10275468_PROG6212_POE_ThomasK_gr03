@@ -10,12 +10,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ContractManagementContext _context;
 
-        public HomeController(ILogger<HomeController> logger, ContractManagementContext context)
+        public HomeController(ContractManagementContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
@@ -24,19 +22,19 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            var userID = HttpContext.Session.GetInt32("userID");
+            int? userID = HttpContext.Session.GetInt32("userID");
             if (userID == null)
             {
                 TempData["ErrorMessage"] = "You must be logged in to access this page.";
                 return RedirectToAction("Index", "Home");
              }
-            var Claims = _context.Claims
+            var Claims = await _context.Claims
                 .Include(claim => claim.User)
                 .Include(claim => claim.Documents)
                 .Where(claim => claim.claimStatus == "Pending")
-                .ToList();
+                .ToListAsync();
 
             return View(Claims);
             
@@ -50,7 +48,6 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-           
             var Claims = _context.Claims
                 .Include(claim => claim.Documents)
                 .Where(claim => claim.userID == (int)userID)

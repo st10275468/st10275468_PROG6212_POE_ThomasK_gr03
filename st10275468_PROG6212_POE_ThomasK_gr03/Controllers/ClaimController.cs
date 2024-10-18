@@ -8,13 +8,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
     {
         private readonly ContractManagementContext _context;
         
-       
         public ClaimController(ContractManagementContext context)
         {
             _context = context;
            
         }
-
 
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(DateTime claimMonth, int hoursWorked, decimal hourlyRate, IFormFileCollection supportingDocument)
@@ -75,9 +73,6 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return RedirectToAction("SubmitClaims","Home");
 
         }
-
-       
-
 
         public IActionResult Index()
         {

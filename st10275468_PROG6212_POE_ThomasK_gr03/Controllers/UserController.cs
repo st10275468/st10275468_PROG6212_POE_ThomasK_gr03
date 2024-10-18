@@ -46,21 +46,11 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 HttpContext.Session.SetString("Role", existingUser.role);
                 HttpContext.Session.SetString("Name" , existingUser.name);
                 
-                TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "! As a " + existingUser.role + " you can submit your claims and view your past claims. " );
-                if (existingUser.role == "Lecturer")
-                {
-                    TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "!");
-                    return RedirectToAction("Index", "Home"); 
-                }
-                if (existingUser.role == "Program Coordinator" || existingUser.role == "Academic Manager")
-                {
-                    TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "!");
-
-                    return RedirectToAction("Index", "Home");
-                }
+                TempData["SuccessMessage"] = ("Welcome back " + existingUser.name + "!" );
+              
                 
             }
-            TempData["ErrorMessage"] = ("Failed Login attempt! Please create an account or try again");
+            TempData["Message"] = ("Failed Login attempt! Please create an account or try again");
             return RedirectToAction("Index", "Home");
         }
 
