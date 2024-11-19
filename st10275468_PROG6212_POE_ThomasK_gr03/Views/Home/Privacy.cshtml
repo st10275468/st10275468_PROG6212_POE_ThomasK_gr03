@@ -19,6 +19,8 @@
         .container {
             margin: 0 auto;
             width: 90%;
+            padding: 0px;
+
         }
          .button-container {
             display: flex;
@@ -68,7 +70,36 @@
             .details-button:hover {
                 background-color: grey;
             }
-      
+
+        .claims-table {
+            margin-bottom: 30px; 
+        }
+
+        table {
+            width: 90%; 
+            border-collapse: collapse;  
+            background-color: white; 
+            color: black; 
+            margin-bottom: 20px; 
+            font-size: 14px; 
+        }
+
+           
+            table th {
+                background-color: black; 
+                color: white; 
+                padding: 10px; 
+                border: 1px solid black;
+                text-align: left; 
+            }
+
+            
+            table td {
+                padding: 2px; 
+                border: 1px solid black;
+                text-align: left; 
+            }
+        
     </style>
 </head>
 <body>
@@ -78,8 +109,8 @@
 
         <!--Table to show the admins all the pending claims-->
             <div class="claims-table">
-            <h2>All pending Claims</h2>
-            <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+            <h2>Verified Claims</h2>
+            <div class="table-container" style="max-height: 300px; overflow-y: auto; margin-bottom:20px;">
                 <table>
                 <thead>
                     <tr>
@@ -97,7 +128,7 @@
                     @if (Model != null && Model.Any())
                     {
                             <!--Looping through all the claims and displaying the ones with a pending status-->
-                        foreach (var claim in Model)
+                        foreach (var claim in Model.Where(c => c.claimVerification == "Verified"))
                         {
                             <tr id="claim-row-@claim.claimID">
                                 <td>No. @claim.claimID</td>
@@ -148,6 +179,81 @@
                     }
                 </tbody>
             </table>
+            </div>
+          </div>
+        <div class="container">
+            <div class="claims-table">
+                <h2>Failed Claims</h2>
+                <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Claim ID</th>
+                                <th>Lecturer</th>
+                                <th>Claim Month</th>
+                                <th>Claim Amount</th>
+                                <th>Verification</th>
+                                <th>Submission Date</th>
+                                <th>Documents</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                <!-- Looping through all the claims and displaying the ones with a failed status -->
+                                foreach (var claim in Model.Where(c => c.claimVerification == "Failed - Under Review"))
+                                {
+                                    <tr id="claim-row-@claim.claimID">
+                                        <td>No. @claim.claimID</td>
+                                        <td>@claim.User.name @claim.User.surname</td>
+                                        <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
+                                        <td>R @claim.claimAmount</td>
+                                        <td>@claim.claimVerification</td>
+                                        <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
+                                        <td>
+                                            @if (claim.Documents != null && claim.Documents.Any())
+                                            {
+                                                <!--Displaying a download button if there is documents attacthed to specific claimns-->
+                                                foreach (var document in claim.Documents)
+                                                {
+                                                    <div>
+                                                        <form asp-action="DownloadDocument" method="get">
+                                                            <input type="hidden" name="documentId" value="@document.documentID" />
+                                                            <button type="submit" class="details-button">Download Document</button>
+                                                        </form>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>No Documents</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div class="button-container">
+                                                <form asp-action="ApproveClaim" method="post" style="display:inline;">
+                                                    <input type="hidden" name="claimID" value="@claim.claimID" />
+                                                    <button type="submit" class="details-button approve">Approve</button>
+                                                </form>
+                                                <form asp-action="DenyClaim" method="post" style="display:inline;">
+                                                    <input type="hidden" name="claimID" value="@claim.claimID" />
+                                                    <button type="submit" class="action-buttons deny">Deny</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="8">No claims available.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         

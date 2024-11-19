@@ -43,7 +43,7 @@ body {
 }
 
 form {
-    max-width: 340px;
+    max-width: 350px;
     padding: 10px; 
     border: 1px solid White;
     border-radius: 8px; 
@@ -53,7 +53,7 @@ form {
 
 h1 {
     text-align: center;
-    padding-top: 30px;
+
     font-size: 55px;
 }
 
@@ -226,7 +226,7 @@ input[type="file"] {
     border-radius: 1px;
 }
 .alert-success {
-    background-color: #155724; /* Darker green */
+    background-color: #155724;
     color: white;
     padding: 10px;
     margin-top: 10px;
@@ -234,10 +234,44 @@ input[type="file"] {
 }
 
 .alert-danger {
-    background-color: #721c24; /* Darker red */
+    background-color: #721c24; 
     color: white;
     padding: 10px;
     margin-top: 10px;
     border-radius: 4px;
 }
+.compact-form {
+    padding: 5px; 
+    max-width: 350px;
+    border: 1px solid White;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.compact-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .compact-table th, .compact-table td {
+        padding: 6px; 
+        text-align: left;
+        color: black;
+        border: 1px solid Teal;
+    }
+
+    .compact-table th {
+        background-color: black;
+        color: white;
+    }
+
+    .compact-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .compact-table tr:hover {
+        background-color: #ddd;
+    }
 /*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024]. */
