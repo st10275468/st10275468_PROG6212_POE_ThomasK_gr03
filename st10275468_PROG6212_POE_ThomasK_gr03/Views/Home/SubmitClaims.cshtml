@@ -79,11 +79,15 @@
                     </div>
                     <div class="form-group">
                         <label for="hoursWorked">Total Hours Worked:</label>
-                        <input type="number" id="hoursWorked" name="hoursWorked" required />
+                        <input type="number" id="hoursWorked" name="hoursWorked" required oninput="calculateClaimAmount()" />
                     </div>
                     <div class="form-group">
                         <label for="hourlyRate">Hourly Rate:</label>
-                        <input type="number" id="hourlyRate" name="hourlyRate" required />
+                        <input type="number" id="hourlyRate" name="hourlyRate" required oninput="calculateClaimAmount()" />
+                    </div>
+                    <div class="form-group">
+                        <label for="totalClaimAmount">Total Claim Amount:</label>
+                        <input type="text" id="totalClaimAmount" name="totalClaimAmount" readonly />
                     </div>
                     <div class="form-group">
                         <label for="supportingDocuments">Supporting Documents (optional):</label>
@@ -176,6 +180,20 @@
                 errorAlert.style.display = 'none';
             }
         }, 3000);
+       /* Java script method to automatically calculate the total claim amount and update it live to the lecturer*/ 
+        function calculateClaimAmount() {
+            const hoursWorked = document.getElementById("hoursWorked").value;
+            const hourlyRate = document.getElementById("hourlyRate").value;
+
+            if (hoursWorked && hourlyRate) {
+                const totalClaimAmount = hoursWorked * hourlyRate;
+                document.getElementById("totalClaimAmount").value = totalClaimAmount.toFixed(2); 
+            } else {
+                document.getElementById("totalClaimAmount").value = ""; 
+            }
+        }
+
+
     </script>
 </body>
 </html>
