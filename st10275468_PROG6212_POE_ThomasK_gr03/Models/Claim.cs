@@ -21,15 +21,21 @@
 
         public void VerifyClaim()
         {
-            // Example logic for claim verification (customize as needed)
-            if (claimAmount > 1000 && (DateTime.Now - submissionDate).Days <= 30)
-            {
+            DateTime claimMonthDay = new DateTime(claimMonth.Year, claimMonth.Month, 15);
+
+            int days = (DateTime.Now - claimMonthDay).Days;
+
+            if (claimAmount > 9000 && claimAmount < 25000 && days <= 45) {
+               
                 claimVerification = "Verified";
+
             }
             else
             {
-                claimVerification = "Failed Verification";
+                claimVerification = "Failed - Under Review";
             }
+           
+            
         }
     }
 }
