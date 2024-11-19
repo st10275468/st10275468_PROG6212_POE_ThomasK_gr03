@@ -10,12 +10,26 @@
 
         public DateTime submissionDate { get; set; }
 
-       public string claimStatus {  get; set; }
+        public string claimVerification { get; set; }
+        public string claimStatus {  get; set; }
+
 
         public int userID {  get; set; }
         public User User { get; set; }
 
         public ICollection<Document> Documents { get; set; }
 
+        public void VerifyClaim()
+        {
+            // Example logic for claim verification (customize as needed)
+            if (claimAmount > 1000 && (DateTime.Now - submissionDate).Days <= 30)
+            {
+                claimVerification = "Verified";
+            }
+            else
+            {
+                claimVerification = "Failed Verification";
+            }
+        }
     }
 }

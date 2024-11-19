@@ -43,10 +43,12 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                     claimAmount = hourlyRate * hoursWorked,
                     submissionDate = DateTime.Now,
                     claimStatus = "Pending",
+                    claimVerification = "Pending",
                     userID = (int)fuserID,
 
                      };
 
+                claim.VerifyClaim();
                 _context.Claims.Add(claim);
                 await _context.SaveChangesAsync();
                 //Prompting the user that their claim was submitted

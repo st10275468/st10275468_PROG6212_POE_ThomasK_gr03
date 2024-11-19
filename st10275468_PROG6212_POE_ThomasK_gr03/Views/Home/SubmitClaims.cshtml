@@ -5,7 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+    <script src="\lib\jquery\dist\jquery.js"></script>
+    <script src="\lib\jquery-validation\dist\jquery.validate.js"></script>
+     <script src="\lib\jquery-validation\dist\additional-methods.js"></script>
+    <script src="\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js"></script>
+
     <style>
         body {
             background-color: teal;
@@ -56,14 +60,21 @@
             button:hover {
                 background-color: grey;
             }
+ .error-message, label.error {
+        color: red; 
+        font-size: 12px; 
+        margin-top: 5px; 
+        display: block; 
+    }
 
-      
-    
+    .error-in-field {
+        border-color: red;
+    }
     </style>
+   
 </head>
 <body>
-
-    <h1>Submit and view Claims</h1>
+      <h1>Submit and view Claims</h1>
     
 
    
@@ -75,15 +86,18 @@
                 <form id="claimForm" method="post" action="@Url.Action("SubmitClaim", "Claim")" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="month">Claim Month:</label>
-                        <input type="month" id="month" name="claimMonth" required />
+                        <input type="month" id="month" name="claimMonth" />
+                        <span class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="hoursWorked">Total Hours Worked:</label>
-                        <input type="number" id="hoursWorked" name="hoursWorked" required oninput="calculateClaimAmount()" />
+                        <input type="number" id="hoursWorked" name="hoursWorked" oninput="calculateClaimAmount()" />
+                         <span class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="hourlyRate">Hourly Rate:</label>
-                        <input type="number" id="hourlyRate" name="hourlyRate" required oninput="calculateClaimAmount()" />
+                        <input type="number" id="hourlyRate" name="hourlyRate" oninput="calculateClaimAmount()" />
+                        <span class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="totalClaimAmount">Total Claim Amount:</label>
@@ -92,6 +106,7 @@
                     <div class="form-group">
                         <label for="supportingDocuments">Supporting Documents (optional):</label>
                         <input type="file" id="supportingDocuments" name="supportingDocument" multiple />
+                       <span class="error-message"></span>
                     </div>
                     <button type="submit">Submit Claim</button>
                     @if (TempData["SuccessMessage"] != null)
@@ -118,6 +133,7 @@
                                 <th>Claim ID</th>
                                 <th>Amount</th>
                                 <th>Status</th>
+                                <th>Verification</th>
                                 <th>Documents</th>
                                 <th>Claim Month</th>
                                 <th>Submission Date</th>
@@ -133,6 +149,7 @@
                                         <td>No. @claim.claimID</td>
                                         <td>R @claim.claimAmount</td>
                                         <td>@claim.claimStatus</td>
+                                        <td>@claim.claimVerification</td>
                                         <td>
                                             @if (claim.Documents != null && claim.Documents.Any())
                                             {
@@ -168,18 +185,68 @@
             </div>
         </div>
     </div>
-    <script>
-        setTimeout(function() {
-            var successAlert = document.querySelector('.alert-success');
-            var errorAlert = document.querySelector('.alert-danger');
+ 
 
-            if (successAlert) {
-                successAlert.style.display = 'none';
-            }
-            if (errorAlert) {
-                errorAlert.style.display = 'none';
-            }
-        }, 3000);
+<script>
+  //Using jQuery to validate the inputted claim data live
+var $jq = jQuery.noConflict();
+$jq(document).ready(function () {
+    $jq("#claimForm").validate({
+        rules: {
+            claimMonth: {
+                required: true
+            },
+            hoursWorked: {
+                required: true,
+                number: true,
+                min: 1
+            },
+            hourlyRate: {
+                required: true,
+                number: true,
+                min: 1
+            },
+            supportingDocuments: {
+                accept: "application/pdf,image/jpeg,image/png",
+                fileSize: 5242880
+             }
+        },
+        messages: {
+            claimMonth: {
+                required: "Month is required"
+            },
+            hoursWorked: {
+                required: "Total hours is required",
+                number: "Invalid number",
+                min: "Total hours must be more than 1"
+            },
+            hourlyRate: {
+                required: "Hourly rate is required",
+                number: "Invalid number",
+                min: "Hourly rate must be more than 1"
+            },
+            supportingDocuments: {
+                accept: "Invalid file format",
+                fileSize: "File cannot exceed 5MB in size"
+             }
+
+        },
+      errorPlacement: function (error, element) {
+        error.addClass("error-message");
+        error.insertAfter(element); 
+    },
+    highlight: function (element) {
+        $jq(element).addClass("error-in-field"); 
+    },
+    unhighlight: function (element) {
+        $jq(element).removeClass("error-in-field"); 
+    },
+
+        submitHandler: function (form) {
+            form.submit();
+        }
+    });
+});
        /* Java script method to automatically calculate the total claim amount and update it live to the lecturer*/ 
         function calculateClaimAmount() {
             const hoursWorked = document.getElementById("hoursWorked").value;
@@ -192,6 +259,9 @@
                 document.getElementById("totalClaimAmount").value = ""; 
             }
         }
+
+         
+
 
 
     </script>
