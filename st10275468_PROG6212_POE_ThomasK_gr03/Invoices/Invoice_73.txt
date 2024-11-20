@@ -1,5 +1,0 @@
-Invoice for Claim #73
-Lecturer: Tom 23
-Claim Amount: R 9000.00
-Status: Approved
-Submission Date: 19 Nov 2024

@@ -1,5 +1,0 @@
-Invoice for Claim #85
-Lecturer: Tom 23
-Claim Amount: R 15200.00
-Status: Processed - Invoice created
-Submission Date: 19 Nov 2024

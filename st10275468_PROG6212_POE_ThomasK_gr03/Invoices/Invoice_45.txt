@@ -1,5 +1,0 @@
-Invoice for Claim #45
-Lecturer: Tom K
-Claim Amount: R 5000.00
-Status: Approved
-Submission Date: 18 Oct 2024
