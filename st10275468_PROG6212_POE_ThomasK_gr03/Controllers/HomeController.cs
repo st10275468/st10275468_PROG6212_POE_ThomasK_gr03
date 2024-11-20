@@ -44,6 +44,13 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
         public async Task<IActionResult> EditLecturerDetails(int userID)
         {
+            int? fuserID = HttpContext.Session.GetInt32("userID");
+            if (fuserID == null)
+            {
+                //Error handeling to make sure that only logged in users will be allowed on this page
+                TempData["ErrorMessage"] = "You must be logged in to access this page.";
+                return RedirectToAction("Index", "Home");
+            }
             var lecturer = await _context.Users
                                             .FirstOrDefaultAsync(u => u.userID == userID && u.role == "Lecturer");
 
@@ -59,6 +66,34 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 return RedirectToAction("ManageLecturers");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateLecturerDetails(int userID, string name, string email)
+        {
+            var lecturer = await _context.Users.FirstOrDefaultAsync(u => u.userID == userID && u.role == "Lecturer");
+            int? fuserID = HttpContext.Session.GetInt32("userID");
+            if (fuserID == null)
+            {
+                //Error handeling to make sure that only logged in users will be allowed on this page
+                TempData["ErrorMessage"] = "You must be logged in to access this page.";
+                return RedirectToAction("Index", "Home");
+            }
+            if (lecturer == null)
+            {
+                TempData["ErrorMessage"] = "Lecturer not found.";
+                return RedirectToAction("ManageLecturers");
+            }
+            lecturer.name = name;
+            lecturer.email = email;
+
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Lecturer details updated successfully.";
+            return RedirectToAction("ManageLecturers");
+        }
+
+
+
 
 
 
