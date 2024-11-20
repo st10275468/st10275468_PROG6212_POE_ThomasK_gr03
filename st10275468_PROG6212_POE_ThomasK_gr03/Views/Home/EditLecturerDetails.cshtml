@@ -1,0 +1,21 @@
+﻿@model st10275468_PROG6212_POE_ThomasK_gr03.Models.User
+
+<h1>Edit Lecturer Details</h1>
+
+<form method="post" asp-action="SaveLecturerChanges">
+    <input type="hidden" asp-for="userID" />
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" asp-for="name" />
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" asp-for="email" />
+    </div>
+
+    <div>
+        <button type="submit">Save Changes</button>
+    </div>
+</form>

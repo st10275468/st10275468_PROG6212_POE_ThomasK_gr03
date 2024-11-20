@@ -23,6 +23,8 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View();
         }
 
+
+
         public async Task<IActionResult> ManageLecturers()
         {
             //Retrieving the current user id
@@ -39,6 +41,27 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
             return View(lecturers);
         }
+
+        public async Task<IActionResult> EditLecturerDetails(int userID)
+        {
+            var lecturer = await _context.Users
+                                            .FirstOrDefaultAsync(u => u.userID == userID && u.role == "Lecturer");
+
+            if (lecturer != null)
+            {
+                
+                return View(lecturer);
+            }
+            else
+            {
+                
+                TempData["ErrorMessage"] = "Lecturer not found or you do not have permission to access this page.";
+                return RedirectToAction("ManageLecturers");
+            }
+        }
+
+
+
 
         public async Task<IActionResult> GenerateInvoices()
         {

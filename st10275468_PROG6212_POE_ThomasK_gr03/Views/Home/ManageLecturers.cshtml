@@ -1,1 +1,154 @@
 ﻿@model List<st10275468_PROG6212_POE_ThomasK_gr03.Models.User>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+        body {
+            background-color: teal;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 0 auto;
+            width: 100%;
+            padding: 0px;
+            margin-top:20px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 3px;
+        }
+
+        .action-buttons {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+            .action-buttons h3 {
+                color: teal;
+                margin-bottom: 10px;
+            }
+
+            .action-buttons button {
+                background-color: teal;
+                color: white;
+                border: none;
+                padding: 4px 8px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 12px;
+                margin-right: 5px;
+            }
+
+                .action-buttons button:hover {
+                    background-color: grey;
+                }
+
+        .details-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+            .details-button:hover {
+                background-color: grey;
+            }
+
+        .claims-table {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 95%;
+            background-color: white;
+            color: black;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+
+            table th {
+                background-color: black;
+                color: white;
+                padding: 4px;
+                border: 1px solid black;
+                text-align: left;
+            }
+
+
+            table td {
+                padding: 2px;
+                border: 1px solid black;
+                text-align: center;
+                font-size: 13px;
+            }
+    </style>
+</head>
+
+<body>
+    <h1>Manage Lecturer Details</h1>
+    
+
+    <div class="container">
+
+        <!--Table to show the admins all the pending claims-->
+        <div class="claims-table">
+            <h2>All Lecturers</h2>
+            <div class="table-container" style="max-height: 300px; overflow-y: auto; margin-bottom:20px;">
+                <table>
+                        <thead>
+                            <tr>
+                                <th>Lecturer</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Looping through the claims and displaying all the specific users claims to them-->
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.name</td>
+                                        <td>@user.email</td>
+                                        
+                                        <td>
+                                        <a href="@Url.Action("EditLecturerDetails", "Home", new { userID = user.userID })" class="action-buttons">
+                                            Edit details
+                                        </a>
+                                            
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="5">No lecturers available.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+           
+        </div>
+   
+</body>
+</html>
