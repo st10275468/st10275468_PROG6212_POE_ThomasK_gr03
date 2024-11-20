@@ -88,11 +88,28 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
 
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Lecturer details updated successfully.";
+            
             return RedirectToAction("ManageLecturers");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteLecturer(int userID)
+        {
+            
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.userID == userID);
 
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Lecturer not found.";
+                return RedirectToAction("ManageLecturers"); 
+            }
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            
+            return RedirectToAction("ManageLecturers");
+        }
 
 
 
