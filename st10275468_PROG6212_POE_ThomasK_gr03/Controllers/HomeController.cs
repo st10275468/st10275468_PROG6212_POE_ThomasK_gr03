@@ -23,6 +23,61 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View();
         }
 
+        public async Task<IActionResult> GenerateInvoices()
+        {
+            //Retrieving the current user id
+            int? userID = HttpContext.Session.GetInt32("userID");
+            if (userID == null)
+            {
+                //Error handeling to make sure that only logged in users will be allowed on this page
+                TempData["ErrorMessage"] = "You must be logged in to access this page.";
+                return RedirectToAction("Index", "Home");
+            }
+            var Claims = await _context.Claims
+                .Include(claim => claim.User)
+                .Include(claim => claim.Documents)
+                .Where(claim => claim.claimStatus == "Approved")
+                .ToListAsync();
+
+            return View(Claims);
+        }
+        public IActionResult GenerateInvoice(int claimID)
+        {
+            var claim = _context.Claims.Include(c => c.User).FirstOrDefault(c => c.claimID == claimID);
+
+            if (claim == null)
+            {
+                TempData["ErrorMessage"] = "Claim not found.";
+                return RedirectToAction("GenerateInvoices");
+            }
+
+            string invoiceDetails = $"Invoice for Claim #{claim.claimID}\n" +
+                                    $"Lecturer: {claim.User.name} {claim.User.surname}\n" +
+                                    $"Claim Amount: R {claim.claimAmount}\n" +
+                                    $"Status: {claim.claimStatus}\n" +
+                                    $"Submission Date: {claim.submissionDate:dd MMM yyyy}\n";
+
+            string invoicePath = Path.Combine(Directory.GetCurrentDirectory(), "Invoices", $"Invoice_{claim.claimID}.txt");
+            System.IO.File.WriteAllText(invoicePath, invoiceDetails);
+
+            claim.claimStatus = "Processed - Invoice created";
+            _context.SaveChanges(); 
+
+            TempData["SuccessMessage"] = $"Invoice for Claim #{claim.claimID} generated successfully.";
+
+            var fileBytes = System.IO.File.ReadAllBytes(invoicePath);
+          
+            var approvedClaims = _context.Claims
+                .Include(claim => claim.User)
+                .Include(claim => claim.Documents)
+                .Where(claim => claim.claimStatus == "Approved")
+                .ToList();
+
+           
+            return View("GenerateInvoices", approvedClaims); 
+        }
+
+
         /// <summary>
         /// Method that passes all the claims and allows them to be displayed to the Admins who can manage them
         /// </summary>
@@ -84,6 +139,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             {
                 //Changing the claim status to approved once the button is clicked
                 Claim.claimStatus = "Approved";
+                if (Claim.claimVerification == "Failed - Under Review")
+                {
+                    Claim.claimVerification = "Reviewed - passed manual verification"; 
+                }
                 _context.SaveChanges();
             }
 
@@ -102,6 +161,10 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             {
                 //Changing the claim status to denied once the deny button is clicked
                 Claim.claimStatus = "Denied";
+                if (Claim.claimVerification == "Failed - Under Review")
+                {
+                    Claim.claimVerification = "Reviewed - Failed manual verification";
+                }
                 _context.SaveChanges();
             }
 
@@ -127,10 +190,13 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return File(fileBytes, "application/octet-stream", document.path);
         }
 
+       
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
 }

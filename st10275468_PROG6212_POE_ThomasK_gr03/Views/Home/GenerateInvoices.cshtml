@@ -1,0 +1,176 @@
+﻿@model List<st10275468_PROG6212_POE_ThomasK_gr03.Models.Claim>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+         body {
+             background-color: teal;
+             color: white;
+             font-family: Arial, sans-serif;
+             margin: 0;
+             padding: 0;
+         }
+
+         .container {
+             margin: 0 auto;
+             width: 90%;
+             padding: 0px;
+
+         }
+          .button-container {
+             display: flex;
+             gap: 5px;
+         }
+
+         .action-buttons {
+             background-color: red;
+             color: white;
+             border: none;
+             padding: 8px 16px;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 14px;
+             margin-right: 5px;
+         }
+          .action-buttons h3 {
+                 color: teal;
+                 margin-bottom: 10px;
+             }
+
+             .action-buttons button {
+                 background-color: teal;
+                 color: white;
+                 border: none;
+                 padding: 4px 8px;
+                 border-radius: 4px;
+                 cursor: pointer;
+                 font-size: 10px;
+                 margin-right: 5px;
+             }
+
+                 .action-buttons button:hover {
+                     background-color: grey;
+                 }
+
+        .details-button {
+             background-color: green;
+             color: white;
+             border: none;
+             padding: 8px 16px;
+             border-radius: 4px;
+             cursor: pointer;
+             font-size: 14px;
+         }
+
+             .details-button:hover {
+                 background-color: grey;
+             }
+
+         .claims-table {
+             margin-bottom: 30px;
+         }
+
+         table {
+             width: 90%;
+             border-collapse: collapse;
+             background-color: white;
+             color: black;
+             margin-bottom: 20px;
+             font-size: 14px;
+         }
+
+
+             table th {
+                 background-color: black;
+                 color: white;
+                 padding: 10px;
+                 border: 1px solid black;
+                 text-align: left;
+             }
+
+
+             table td {
+                 padding: 2px;
+                 border: 1px solid black;
+                 text-align: left;
+             }
+
+    </style>
+</head>
+<body>
+    <h1>Generate Invoices for Approved Claims</h1>
+
+    <div class="container">
+
+        <!--Table to show the admins all the approved claims-->
+        <div class="claims-table">
+            <h2>Approved Claims</h2>
+            <div class="table-container" style="max-height: 300px; overflow-y: auto; margin-bottom:20px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Claim ID</th>
+                            <th>Lecturer</th>
+                            <th>Claim Amount</th>
+                            <th>Status</th>
+                            <th>Submission Date</th>
+                            
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            <!--Looping through all the claims and displaying the ones with a pending status-->
+                            foreach (var claim in Model)
+                            {
+                                <tr id="claim-row-@claim.claimID">
+                                    <td>No. @claim.claimID</td>
+                                    <td>@claim.User.name @claim.User.surname</td>
+                                    <td>R @claim.claimAmount</td>
+                                    <td>@claim.claimStatus</td>
+                                    <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
+                                    
+                                    <td>
+                                        <div class="button-container">
+                                            <form asp-action="GenerateInvoice" method="post" style="display:inline;">
+                                                <input type="hidden" name="claimID" value="@claim.claimID" />
+                                                <button type="submit" class="details-button approve">Generate Invoice</button>
+                                            </form>
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6">No approved claims available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        setTimeout(function() {
+            var successAlert = document.querySelector('.alert-success');
+            var errorAlert = document.querySelector('.alert-danger');
+
+            if (successAlert) {
+                successAlert.style.display = 'none';
+            }
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+<!--OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 9 September 2024].-->

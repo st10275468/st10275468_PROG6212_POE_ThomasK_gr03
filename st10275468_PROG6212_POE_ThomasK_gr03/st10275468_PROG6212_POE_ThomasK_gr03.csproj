@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Documents\" />
+    <Folder Include="Invoices\" />
   </ItemGroup>
 
 </Project>
