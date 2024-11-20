@@ -23,6 +23,23 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View();
         }
 
+        public async Task<IActionResult> ManageLecturers()
+        {
+            //Retrieving the current user id
+            int? userID = HttpContext.Session.GetInt32("userID");
+            if (userID == null)
+            {
+                //Error handeling to make sure that only logged in users will be allowed on this page
+                TempData["ErrorMessage"] = "You must be logged in to access this page.";
+                return RedirectToAction("Index", "Home");
+            }
+            var lecturers =  await _context.Users
+                .Where(user => user.role == "Lecturer")
+                .ToListAsync();
+
+            return View(lecturers);
+        }
+
         public async Task<IActionResult> GenerateInvoices()
         {
             //Retrieving the current user id
