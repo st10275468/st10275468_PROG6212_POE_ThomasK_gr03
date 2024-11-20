@@ -77,6 +77,39 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
             return View("GenerateInvoices", approvedClaims); 
         }
 
+        public IActionResult DownloadInvoice(int claimID)
+        {
+            
+            var claim = _context.Claims.Include(c => c.User).FirstOrDefault(c => c.claimID == claimID);
+
+            if (claim == null)
+            {
+                TempData["ErrorMessage"] = "Claim not found.";
+                return RedirectToAction("SubmitClaims");
+            }
+
+            if (claim.claimStatus != "Processed - Invoice created")
+            {
+                TempData["ErrorMessage"] = "Invoice has not been generated for this claim.";
+                return RedirectToAction("SubmitClaims");
+            }
+
+            string invoicePath = Path.Combine(Directory.GetCurrentDirectory(), "Invoices", $"Invoice_{claim.claimID}.txt");
+
+           
+            if (!System.IO.File.Exists(invoicePath))
+            {
+                TempData["ErrorMessage"] = "Invoice file not found.";
+                return RedirectToAction("SubmitClaims");
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(invoicePath);
+
+            var fileName = Path.GetFileName(invoicePath);
+
+            
+            return File(fileBytes, "application/octet-stream", fileName);
+        }
 
         /// <summary>
         /// Method that passes all the claims and allows them to be displayed to the Admins who can manage them
@@ -141,7 +174,7 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 Claim.claimStatus = "Approved";
                 if (Claim.claimVerification == "Failed - Under Review")
                 {
-                    Claim.claimVerification = "Reviewed - passed manual verification"; 
+                    Claim.claimVerification = "Passed manual verification"; 
                 }
                 _context.SaveChanges();
             }
@@ -163,7 +196,7 @@ namespace st10275468_PROG6212_POE_ThomasK_gr03.Controllers
                 Claim.claimStatus = "Denied";
                 if (Claim.claimVerification == "Failed - Under Review")
                 {
-                    Claim.claimVerification = "Reviewed - Failed manual verification";
+                    Claim.claimVerification = "Failed manual verification";
                 }
                 _context.SaveChanges();
             }

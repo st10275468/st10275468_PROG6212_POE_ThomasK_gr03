@@ -146,10 +146,11 @@ tr:hover {
 table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: hidden;
 }
 
 th, td {
-    padding: 8px;
+    padding: 4px;
     text-align: left;
     color: black;
     border: 1px solid teal;
@@ -193,11 +194,12 @@ table td {
 }
 
 .column {
-    width: 60%;
+    width: 65%;
     padding: 10px;
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width:1000px;
 }
 
     .column1 h2, .column h2 {

@@ -1,0 +1,5 @@
+Invoice for Claim #130
+Lecturer: Tom K
+Claim Amount: R 12321.00
+Status: Approved
+Submission Date: 20 Nov 2024

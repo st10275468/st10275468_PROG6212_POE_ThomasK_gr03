@@ -1,5 +1,5 @@
-Invoice for Claim #101
+Invoice for Claim #104
 Lecturer: Tom K
-Claim Amount: R 10989.00
+Claim Amount: R 5359.00
 Status: Approved
 Submission Date: 20 Nov 2024

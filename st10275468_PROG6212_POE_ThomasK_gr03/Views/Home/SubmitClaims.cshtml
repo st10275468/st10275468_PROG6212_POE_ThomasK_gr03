@@ -11,18 +11,59 @@
     <script src="\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js"></script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             background-color: teal;
             color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+             overflow-x: hidden;
         }
 
         .container {
             margin: 0 auto;
-             width: 100%;
+            width: 100%;
+            overflow-x: hidden; 
         }
+
+        .table-container {
+            max-height: 450px;
+            overflow-y: auto; 
+            width: 100%;
+        }
+
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+           
+        }
+
+        th, td {
+            
+            text-align: left;
+            
+            overflow: hidden;
+        }
+
+        th {
+            background-color: Black;
+            color: white;
+        }
+
+        td {
+            background-color: #f2f2f2;
+            font-size:13px;
+        }
+
+        td, th {
+            white-space: nowrap;
+          
+        }
+
 
         .row {
             display: flex;
@@ -126,7 +167,7 @@
 
             <div class="column">
                 <h2>View your Claims:</h2>
-                <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                <div class="table-container" style="max-height: 450px; overflow-y: auto;">
                     <table>
                         <thead>
                             <tr>
@@ -134,9 +175,8 @@
                                 <th>Amount</th>
                                 <th>Status</th>
                                 <th>Verification</th>
-                                <th>Documents</th>
                                 <th>Claim Month</th>
-                                <th>Submission Date</th>
+                                <th>Invoices</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,26 +190,16 @@
                                         <td>R @claim.claimAmount</td>
                                         <td>@claim.claimStatus</td>
                                         <td>@claim.claimVerification</td>
+                                        <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
                                         <td>
-                                            @if (claim.Documents != null && claim.Documents.Any())
+                                            @if (claim.claimStatus == "Processed - Invoice created")
                                             {
-                                                foreach (var document in claim.Documents)
-                                                {
-                                                    <div>
-                                                        <form asp-action="DownloadDocument" method="get">
-                                                            <input type="hidden" name="documentId" value="@document.documentID" />
-                                                            <button type="submit" class="action-buttons">Download Document</button>
-                                                        </form>
-                                                    </div>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <span>No Documents</span>
+                                                <form asp-action="DownloadInvoice" method="get">
+                                                    <input type="hidden" name="claimId" value="@claim.claimID" />
+                                                    <button type="submit" class="action-buttons">Download Invoice</button>
+                                                </form>
                                             }
                                         </td>
-                                        <td>@claim.claimMonth.ToString("MMMM yyyy")</td>
-                                        <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
                                     </tr>
                                 }
                             }
