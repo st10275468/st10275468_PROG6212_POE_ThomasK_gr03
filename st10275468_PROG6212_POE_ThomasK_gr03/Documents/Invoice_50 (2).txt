@@ -1,0 +1,5 @@
+Invoice for Claim #50
+Lecturer: asdf asdf
+Claim Amount: R 252.00
+Status: Approved
+Submission Date: 30 Oct 2024

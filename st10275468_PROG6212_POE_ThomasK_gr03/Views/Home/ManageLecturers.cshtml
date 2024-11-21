@@ -10,7 +10,6 @@
             margin: 0;
             padding: 0;
         }
-
         form {
             display: inline;
             margin: 0;
@@ -22,12 +21,10 @@
             padding: 0px;
             margin-top:20px;
         }
-
         .button-container {
             display: flex;
             gap: 3px;
         }
-
         .action-buttons {
             width: 80px;
             background-color: green;
@@ -39,13 +36,11 @@
             font-size: 12px;
             margin-right: 5px;
         }
-
-            .action-buttons h3 {
+        .action-buttons h3 {
                 color: teal;
                 margin-bottom: 10px;
             }
-
-            .action-buttons button {
+        .action-buttons button {
                 background-color: teal;
                 color: white;
                 border: none;
@@ -56,7 +51,7 @@
                 margin-right: 5px;
             }
 
-                .action-buttons button:hover {
+        .action-buttons button:hover {
                     background-color: grey;
                 }
 
@@ -69,8 +64,7 @@
             cursor: pointer;
             font-size: 12px;
         }
-
-            .details-button:hover {
+        .details-button:hover {
                 background-color: grey;
             }
 
@@ -85,19 +79,15 @@
             margin-bottom: 20px;
             font-size: 14px;
         }
-
-
-            table th {
+        table th {
                 background-color: black;
                 color: white;
                 padding: 4px;
                 border: 1px solid black;
-                text-align: left;
+                text-align: center;
             }
-
-
-            table td {
-                padding: 2px;
+        table td {
+                padding: 5px;
                 border: 1px solid black;
                 text-align: center;
                 font-size: 13px;
@@ -108,10 +98,7 @@
 <body>
     <h1>Manage Lecturer Details</h1>
     
-
     <div class="container">
-
-        <!--Table to show the admins all the pending claims-->
         <div class="claims-table">
             <h2>All Lecturers</h2>
             <div class="table-container" style="max-height: 300px; overflow-y: auto; margin-bottom:20px;">
@@ -120,20 +107,20 @@
                             <tr>
                                 <th>Lecturer</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Actions</th>
-                                
                             </tr>
                         </thead>
                         <tbody>
-                            <!--Looping through the claims and displaying all the specific users claims to them-->
+                          
                             @if (Model != null && Model.Any())
                             {
                                 @foreach (var user in Model)
                                 {
                                     <tr>
-                                        <td>@user.name</td>
+                                        <td>@user.name, @user.surname</td>
                                         <td>@user.email</td>
-                                        
+                                        <td>@user.role</td>
                                         <td>
                                         <a href="@Url.Action("EditLecturerDetails", "Home", new { userID = user.userID })" class="action-buttons">
                                             Edit details

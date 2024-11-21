@@ -9,7 +9,6 @@
             color: white;
             font-family: Arial, sans-serif;
         }
-
         .form-container {
             margin-top: 40px;
             margin: 0 auto;
@@ -18,12 +17,10 @@
             border-radius: 10px;
             width: 30%;
         }
-
         .form-container label {
             display: block;
             margin-bottom: 5px;
         }
-
         .form-container input {
             width: 100%;
             padding: 8px;
@@ -31,7 +28,6 @@
                 border: 1px solid black;
             border-radius: 2px;
         }
-
         .form-container button {
             background-color: green;
             color: white;
@@ -40,21 +36,25 @@
             cursor: pointer;
             border-radius: 4px;
         }
-
         .form-container button:hover {
             background-color: teal;
         }
     </style>
+
 </head>
 <body>
     <h1 style="margin-bottom:40px;">Edit Lecturer Details</h1>
     <div class="form-container">
+
         <form asp-action="UpdateLecturerDetails" asp-controller="Home" method="post">
             <input type="hidden" name="userID" value="@Model.userID" />
             <label style="margin-bottom:10px; font-size:20px;">Details of Lecturer:</label>
 
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="@Model.name" />
+
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" value="@Model.surname" />
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="@Model.email" />
@@ -64,6 +64,7 @@
 
             <button type="submit">Save Changes</button>
         </form>
+
     </div>
 </body>
 </html>

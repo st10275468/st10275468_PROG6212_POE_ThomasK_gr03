@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
          body {
              background-color: teal;
@@ -13,19 +12,17 @@
              margin: 0;
              padding: 0;
          }
-
-         .container {
+        .container {
              margin: 0 auto;
              width: 90%;
              padding: 0px;
 
          }
-          .button-container {
+         .button-container {
              display: flex;
              gap: 5px;
          }
-
-         .action-buttons {
+        .action-buttons {
              background-color: red;
              color: white;
              border: none;
@@ -35,12 +32,11 @@
              font-size: 12px;
              margin-right: 5px;
          }
-          .action-buttons h3 {
+         .action-buttons h3 {
                  color: teal;
                  margin-bottom: 10px;
              }
-
-             .action-buttons button {
+        .action-buttons button {
                  background-color: teal;
                  color: white;
                  border: none;
@@ -50,11 +46,9 @@
                  font-size: 10px;
                  margin-right: 5px;
              }
-
-                 .action-buttons button:hover {
+        .action-buttons button:hover {
                      background-color: grey;
                  }
-
         .details-button {
              background-color: green;
              color: white;
@@ -64,35 +58,27 @@
              cursor: pointer;
              font-size: 12px;
          }
-
-             .details-button:hover {
+        .details-button:hover {
                  background-color: grey;
              }
-
-         .claims-table {
+        .claims-table {
              margin-bottom: 30px;
          }
-
-         table {
+        table {
              width: 95%;
-             
              background-color: white;
              color: black;
              margin-bottom: 20px;
              font-size: 14px;
          }
-
-
-             table th {
+        table th {
                  background-color: black;
                  color: white;
                  padding: 5px;
                  border: 1px solid black;
                  text-align: left;
              }
-
-
-             table td {
+        table td {
                  padding: 2px;
                  border: 1px solid black;
                  text-align: Center;
@@ -117,7 +103,6 @@
                             <th>Claim Amount</th>
                             <th>Status</th>
                             <th>Submission Date</th>
-                            
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -133,7 +118,6 @@
                                     <td>R @claim.claimAmount</td>
                                     <td>@claim.claimStatus</td>
                                     <td>@claim.submissionDate.ToString("dd MMM yyyy")</td>
-                                    
                                     <td>
                                         <div class="button-container">
                                             <form asp-action="GenerateInvoice" method="post" style="display:inline;">

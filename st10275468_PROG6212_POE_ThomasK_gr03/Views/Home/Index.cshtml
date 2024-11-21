@@ -5,15 +5,10 @@
 <style>
     body {
     background-color: teal;
-}
-
-    .div1 {
-        
-        padding-top:20px;
-        
-        
     }
-    
+    .div1 {
+        padding-top:20px;
+    }
     .h2{
         color: white;
         text-align:left;
@@ -21,7 +16,6 @@
     .form-group{
         padding-top:15px;
     }
-
     .action-buttons {
         background-color: green;
         color: white;
@@ -36,14 +30,17 @@
 </style>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="path/to/your/styles.css">
 </head>
+
 <body>
     <h1 class="h1">Contract Monthly Claim System</h1>
+
      @if (TempData["SuccessMessage"] != null)
     {
         <div class="alert alert-success">

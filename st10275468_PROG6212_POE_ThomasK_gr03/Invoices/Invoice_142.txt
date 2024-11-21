@@ -1,0 +1,9 @@
+-------CLAIM INVOICE-------
+Invoice for Claim #142
+Lecturer: Test 23
+Email: Test@gmail.com
+Claim Amount: R 14544.00
+Claim Month:  Jun 2024
+Status: Approved
+Verification: Passed manual verification
+Submission Date: 20 Nov 2024
