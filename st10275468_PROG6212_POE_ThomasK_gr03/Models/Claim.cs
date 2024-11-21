@@ -19,6 +19,9 @@
 
         public ICollection<Document> Documents { get; set; }
 
+        /// <summary>
+        /// Method created that automatically checks the claims against certain criteria. If a claim fails verification it can still be manually verified
+        /// </summary>
         public void VerifyClaim()
         {
             DateTime claimMonthDay = new DateTime(claimMonth.Year, claimMonth.Month, 15);
