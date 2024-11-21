@@ -1,4 +1,4 @@
-/*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 17 October 2024]. */
+/*  OpenAI.2024. Chat-GPT(Version 3.5).[Large language model]. Available at: https://chat.openai.com/[Accessed: 20 November 2024]. */
 using Microsoft.AspNetCore.Mvc;
 using st10275468_PROG6212_POE_ThomasK_gr03.Models;
 using st10275468_PROG6212_POE_ThomasK_gr03.Controllers;
