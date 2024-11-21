@@ -1,0 +1,9 @@
+-------CLAIM INVOICE-------
+Invoice for Claim #140
+Lecturer: Tom K
+Email: TomK@gmail.com
+Claim Amount: R 11700.00
+Claim Month:  Oct 2024
+Status: Approved
+Verification: Verified
+Submission Date: 20 Nov 2024

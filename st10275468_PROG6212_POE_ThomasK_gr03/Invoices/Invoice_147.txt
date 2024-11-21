@@ -1,9 +1,0 @@
--------CLAIM INVOICE-------
-Invoice for Claim #147
-Lecturer: test3 ad
-Email: test3@gmail.com
-Claim Amount: R 221880.00
-Claim Month:  Sep 2024
-Status: Approved
-Verification: Passed manual verification
-Submission Date: 20 Nov 2024

@@ -1,5 +1,0 @@
-Invoice for Claim #133
-Lecturer: Test 1
-Claim Amount: R 11650.00
-Status: Approved
-Submission Date: 20 Nov 2024
